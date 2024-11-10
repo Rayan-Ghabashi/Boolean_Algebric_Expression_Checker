@@ -38,4 +38,4 @@ class Bytepy:
         return Bytepy(self.__value + other.__value, True)
     def __str__(self):
         # change maybe
-        return bin(self.__value)
+        return bin(self.__value)[2:]
