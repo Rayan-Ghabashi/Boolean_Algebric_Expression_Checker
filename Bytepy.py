@@ -1,7 +1,6 @@
 from typing import Union
 class Bytepy:
     def __init__(self, input: Union[str, 'Bytepy.Bytepy'], base10 = False):
-        print(type(input))
         if isinstance(input, Bytepy):
             self.__value = input.__value
             self.__binary = input.__binary
