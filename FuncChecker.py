@@ -13,6 +13,7 @@ class FuncChecker:
         if self.num_args == 0:
             raise ValueError("Function must have at least one argument")
         self.inputs = self.generate_inputs()
+        self.outputs = self.generate_outputs()
 
     def generate_inputs(self):
         inputs_arr = []
@@ -24,17 +25,18 @@ class FuncChecker:
             input = Bytepy(input, binary_length=self.num_args)
         return inputs_arr
 
-    def generate_desired_outputs(self):
-        desired_outputs = []
-        print(self.inputs)
+    def generate_outputs(self):
+        outputs = []
         for input in self.inputs:
-            print(repr(input))
-            desired_outputs.append(self.func(*input))
-        return desired_outputs
+             outputs.append(self.func(*input))
+        return outputs
+    
+    def check_outputs(self, desired_outputs):
+        for i in range(len(self.outputs)):
+            if self.outputs[i] != desired_outputs[i]:
+                print(repr(self.outputs[i]), repr(desired_outputs[i]))
+                return False
+        return True
 
 if __name__ == '__main__':
-    def funca(x, y):
-        return x + y
-
-    checker1 = FuncChecker(funca)
-    checker1.generate_desired_outputs()
+   ... 

@@ -62,7 +62,7 @@ class Bytepy:
 
     def __mul__(self, other: "Bytepy"):
         binary_length = self.__findBinaryLength(other)
-        resut = self.__integer & other.__integer
+        result = self.__integer & other.__integer
         result = str(result)
         return Bytepy(result, is_base10=True, binary_length=binary_length)
 
