@@ -67,11 +67,13 @@ class Bytepy:
         return Bytepy(result, is_base10=True, binary_length=binary_length)
 
     def __neg__(self):
-        binary_length = self.__binary_length
-        result = ~self.__integer
-        result = str(result)
-        return Bytepy(result, is_base10=True, binary_length=binary_length)
-
+        # Compute the maximum value for the given bit length
+        max_value = (1 << self.__binary_length) - 1
+        # Compute one's complement within the bit length
+        result_int = (~self.__integer) & max_value
+        # Convert back to binary string with proper padding
+        result_bin = bin(result_int)[2:].zfill(self.__binary_length)
+        return Bytepy(result_bin, binary_length=self.__binary_length)
     def __eq__(self, other):
         if isinstance(other, Bytepy):
             return self.__integer == other.__integer

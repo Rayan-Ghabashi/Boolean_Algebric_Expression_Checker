@@ -12,10 +12,10 @@ class FuncChecker:
         self.num_args = len(inspect.signature(func).parameters)
         if self.num_args == 0:
             raise ValueError("Function must have at least one argument")
-        self.inputs = self.generate_inputs()
-        self.outputs = self.generate_outputs()
+        self.inputs = self.__generate_inputs()
+        self.outputs = self.__generate_outputs()
 
-    def generate_inputs(self):
+    def __generate_inputs(self):
         inputs_arr = []
         input = Bytepy("0", binary_length=self.num_args)
 
@@ -25,18 +25,33 @@ class FuncChecker:
             input = Bytepy(input, binary_length=self.num_args)
         return inputs_arr
 
-    def generate_outputs(self):
+    def __generate_outputs(self):
         outputs = []
         for input in self.inputs:
              outputs.append(self.func(*input))
         return outputs
-    
+    def generate_desired_outputs(string):
+        desired_outputs = []
+        for i in range(len(string)):
+            if string[i].lower() == "x":
+                desired_outputs.append(Bytepy("1"))
+            desired_outputs.append(Bytepy(string[i]))
+        return desired_outputs
+
     def check_outputs(self, desired_outputs):
         for i in range(len(self.outputs)):
             if self.outputs[i] != desired_outputs[i]:
                 print(repr(self.outputs[i]), repr(desired_outputs[i]))
+                print(f"at index {i}")
                 return False
         return True
 
 if __name__ == '__main__':
-   ... 
+    def dummy_func(A1, A0, B1, B0):
+       return A1*-B1 + A1*A0*-B0 + A0*-B1*-B0
+    
+    desired_outputs = FuncChecker.generate_desired_outputs("0000100011001110")
+    checker = FuncChecker(dummy_func)
+    print(f"Outputs: {checker.outputs}")
+    print(checker.check_outputs(desired_outputs))
+    

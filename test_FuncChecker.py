@@ -11,7 +11,7 @@ class TestFuncChecker(unittest.TestCase):
 
         checker1 = FuncChecker(dummy_func1)
         expected_inputs1 = [Bytepy("0"), Bytepy("1")]
-        self.assertEqual(checker1.generate_inputs(), expected_inputs1)
+        self.assertEqual(checker1.__generate_inputs(), expected_inputs1)
 
     def test_generate_inputs_2_args(self):
         # Test case for a function with 2 arguments
@@ -20,7 +20,7 @@ class TestFuncChecker(unittest.TestCase):
 
         checker2 = FuncChecker(dummy_func2)
         expected_inputs2 = [Bytepy("00"), Bytepy("01"), Bytepy("10"), Bytepy("11")]
-        self.assertEqual(checker2.generate_inputs(), expected_inputs2)
+        self.assertEqual(checker2.__generate_inputs(), expected_inputs2)
 
     def test_generate_inputs_3_args(self):
         # Test case for a function with 3 arguments
@@ -38,14 +38,14 @@ class TestFuncChecker(unittest.TestCase):
             Bytepy("110"),
             Bytepy("111"),
         ]
-        self.assertEqual(checker3.generate_inputs(), expected_inputs3)
+        self.assertEqual(checker3.__generate_inputs(), expected_inputs3)
     def test_generate_inputs_6_args(self):
         def dummy_func6(a, b, c, d, e, f):
             return a + b + c + d + e + f
 
         checker6 = FuncChecker(dummy_func6)
         expected_inputs6 = [Bytepy(format(i, "06b")) for i in range(64)]
-        self.assertEqual(checker6.generate_inputs(), expected_inputs6)
+        self.assertEqual(checker6.__generate_inputs(), expected_inputs6)
 
     def test_FuncChecker_error(self):
         def dummy_func_error():
