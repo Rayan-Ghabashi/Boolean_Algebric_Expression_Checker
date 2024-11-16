@@ -98,7 +98,17 @@ class Bytepy:
         """
         biggest = max(self.__binary_length, other.__binary_length)
         return biggest
+    def concat(self, other: "Bytepy"):
+        """
+        Concatenate two Bytepy objects horizontally by their binary strings.
+        Args:
+            other (Bytepy): The other Bytepy object.
 
+        Returns:
+            Bytepy: The concatenated Bytepy object.
+        """
+        result = self.__binary + other.__binary
+        return Bytepy(result, binary_length=self.__binary_length + other.__binary_length)
     def xor(self, other: "Bytepy"):
         """
         Perform bitwise XOR operation between two Bytepy objects.
