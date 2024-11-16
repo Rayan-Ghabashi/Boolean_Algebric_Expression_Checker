@@ -99,6 +99,20 @@ class Bytepy:
         biggest = max(self.__binary_length, other.__binary_length)
         return biggest
 
+    def xor(self, other: "Bytepy"):
+        """
+        Perform bitwise XOR operation between two Bytepy objects.
+
+        Args:
+            other (Bytepy): The other Bytepy object.
+
+        Returns:
+            Bytepy: The result of the bitwise XOR operation.
+        """
+        binary_length = self.__find_binary_length(other)
+        result = self.__integer ^ other.__integer
+        result = str(result)
+        return Bytepy(result, is_base10=True, binary_length=binary_length)
     def __add__(self, other: "Bytepy"):
         """
         Perform bitwise OR operation between two Bytepy objects.
